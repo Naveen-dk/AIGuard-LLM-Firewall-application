@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 224 71% 4%;
+  --foreground: 142.1 76.2% 36.3%;
+  --border: 142.1 76.2% 17%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', 'Courier New', Courier, monospace;
+  background-color: #03060b;
+  color: #00ff66;
+}
+
+/* CRT Screen Scanline Overlay */
+.crt-overlay::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 9999;
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+}
+
+/* CRT screen flicker */
+@keyframes flicker {
+  0% { opacity: 0.97; }
+  50% { opacity: 1; }
+  100% { opacity: 0.98; }
+}
+
+.crt-screen {
+  animation: flicker 0.15s infinite;
+}
+
+/* Hacker matrix scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #020408;
+  border-left: 1px solid #10b98133;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #10b98166;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00ff66;
+  box-shadow: 0 0 8px #00ff66;
+}
+
+/* Cybernetic Neon Glows */
+.glow-matrix-green {
+  box-shadow: 0 0 15px -3px rgba(0, 255, 102, 0.3);
+  border: 1px solid rgba(0, 255, 102, 0.4);
+}
+
+.glow-matrix-red {
+  box-shadow: 0 0 15px -3px rgba(255, 0, 60, 0.4);
+  border: 1px solid rgba(255, 0, 60, 0.5);
+}
+
+.glow-matrix-amber {
+  box-shadow: 0 0 15px -3px rgba(245, 158, 11, 0.3);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+/* Retro Matrix scan animation */
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.scanline-bar {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background: rgba(0, 255, 102, 0.2);
+  box-shadow: 0 0 10px #00ff66;
+  animation: scan 6s linear infinite;
+  pointer-events: none;
+}
